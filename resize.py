@@ -47,7 +47,7 @@ data = json.load(open('Contents.json'))
 
 for img in data.get('images'):
 
-    dirname = os.path.join(opt_output, 'ios/AppIcon.appiconset')
+    dirname = os.path.join(opt_output, 'ios', 'AppIcon.appiconset')
     call(['mkdir', '-p', dirname])
     call(['cp', 'Contents.json', dirname])
 
