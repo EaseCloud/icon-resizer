@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import json
+import re
 import sys
 import os.path
 from getopt import getopt, GetoptError
@@ -50,13 +51,16 @@ for img in data.get('images'):
     call(['mkdir', '-p', dirname])
     call(['cp', 'Contents.json', dirname])
 
-    file_name = 'icon-{}.png'.format(img.get('size'))
+    w, h = map(float, re.findall(r'^(\d+)x(\d+)$', img.get('size'))[0])
+    scale = int(img.get('scale')[:-1])
+    size = '{:.0f}x{:.0f}'.format(round(w * scale), round(h * scale))
+    file_name = 'icon-{}.png'.format(size)
 
     cmd = [
         'convert', 
         opt_input,
         '-resize',
-        img.get('size'),
+        size,
         os.path.join(dirname, file_name)
     ]
     print(' '.join(cmd))
