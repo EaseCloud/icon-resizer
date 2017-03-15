@@ -24,7 +24,7 @@ options:
 
 try:
     opts, args = getopt(sys.argv[1:], 'hi:o:', ['help', 'input=', 'output='])
-    print opts
+    #print opts
     for opt, arg in opts:
         if opt in ('-h', '--help'):
             print(help_text)
