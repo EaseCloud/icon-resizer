@@ -45,25 +45,46 @@ except GetoptError:
 data = json.load(open('Contents.json'))
 
 for img in data.get('images'):
-    scale = img.get('scale')
-    size = img.get('size')
-    base_size = size[:size.find('x')]
-    #img_size = int(int(scale[:-1]) * float(base_size))
-    #file_name = 'icon-{}.png'.format(img_size)
-    file_name = 'icon-{}.png'.format(size)
-    # file_name = 'icon-{}@{}.png'.format(base_size, scale)
 
-    dirname = opt_output + '/ios'
-
+    dirname = os.path.join(opt_output, 'ios')
     call(['mkdir', '-p', dirname])
     call(['cp', 'Contents.json', dirname])
+
+    file_name = 'icon-{}.png'.format(img.get('size'))
 
     cmd = [
         'convert', 
         opt_input,
         '-resize',
-        size,
+        img.get('size'),
         os.path.join(dirname, file_name)
+    ]
+    print(' '.join(cmd))
+    call(cmd)
+
+
+# Android icons
+
+data = [
+    ('drawable-ldpi', 36),
+    ('drawable-mdpi', 48),
+    ('drawable-hdpi', 72),
+    ('drawable-xhdpi', 96),
+    ('drawable-xxhdpi', 144),
+    ('drawable-xxxdpi', 192),
+]
+
+for scheme, size in data:
+
+    dirname = os.path.join(opt_output, 'android', scheme)
+    call(['mkdir', '-p', dirname])
+
+    cmd = [
+        'convert', 
+        opt_input,
+        '-resize',
+        str(size),
+        os.path.join(dirname, 'icon.png')
     ]
     print(' '.join(cmd))
     call(cmd)
