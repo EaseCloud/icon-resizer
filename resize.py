@@ -75,7 +75,7 @@ data = [
     ('drawable-hdpi', 72),
     ('drawable-xhdpi', 96),
     ('drawable-xxhdpi', 144),
-    ('drawable-xxxdpi', 192),
+    ('drawable-xxxhdpi', 192),
 ]
 
 for scheme, size in data:
