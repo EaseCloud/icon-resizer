@@ -76,6 +76,10 @@ data = [
     ('drawable-xhdpi', 96),
     ('drawable-xxhdpi', 144),
     ('drawable-xxxhdpi', 192),
+    ('mipmap-ldpi', 36),
+    ('mipmap-mdpi', 48),
+    ('mipmap-hdpi', 72),
+    ('mipmap-xhdpi', 96),
 ]
 
 for scheme, size in data:
